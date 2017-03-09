@@ -116,21 +116,31 @@ class OddballParticle implements Particle {
 class JumboParticle implements Particle
 {
   private double x, y, speed, angle;
-  private int Color;
+  private int Color, direction;
   
   JumboParticle() {
     x = 200;
     y = 200;
+    direction = 0;
     speed = Math.random() * 10;
     angle = Math.PI * Math.random() * 2;
     Color = color(random(255), random(255), random(255));
   }
   public void move() {
-    x = x + (Math.cos(angle) * speed);
-    y = y + (Math.sin(angle) * speed);
+   if(x >= 375 || y >= 375) {
+        direction = 1; }
+      else if(x <= 0 || y <= 0) {
+        direction = 0; }
+     
+     if(direction == 0) {
+      x = x + random(25);
+      y = y + random(25); }
+      else if(direction == 1) {
+        x = x - random(25);
+        y = y - random(25); }
   }
   public void show() {
     fill(Color);
-    ellipse((float)x,(float)y,50.0,50.0);
+    ellipse((float)x,(float)y,100.0,100.0);
   }
 }
